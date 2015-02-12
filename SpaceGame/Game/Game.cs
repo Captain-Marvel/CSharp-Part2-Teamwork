@@ -9,7 +9,7 @@ namespace SpaceGame
         // Set console max width and height
         private const int maxWidth = 40;
         private const int maxHeight = 40;
-
+         
         // Keeps the x coordinate of our spaceship position 
         static readonly int playerPosX = Console.BufferWidth / 2;
         static readonly int playerPosY = Console.BufferHeight - 1;
@@ -24,11 +24,14 @@ namespace SpaceGame
 
         // Set spaceships and shots icons
         private const char playerIcon = 'Ä';
+
+        // Multiple meteors
         public static char[] enemyIcons = new char[] { '#', '*', '@' };
         private const char shotIcon = '"';
 
         // Set spaceships and shots colors
         private const ConsoleColor playerColor = ConsoleColor.Cyan;
+       
         public static ConsoleColor[] enemiesColors =  {ConsoleColor.Red, ConsoleColor.DarkCyan,
                                                       ConsoleColor.Blue, ConsoleColor.Magenta,
                                                       ConsoleColor.DarkYellow, ConsoleColor.DarkRed,
