@@ -14,14 +14,14 @@ namespace SpaceGame
         private char symbol;
         private ConsoleColor color;
 
-        // Holds X coordinate for the rock
+        // Holds X coordinate for the meteor
         public int X
         {
             get { return this.x; }
             set { this.x = value; }
         }
 
-        // Holds Y coordinate for the rock
+        // Holds Y coordinate for the meteor
         public int Y
         {
             get { return this.y; }
