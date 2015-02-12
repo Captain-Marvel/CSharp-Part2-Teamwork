@@ -4,203 +4,243 @@ using System.Threading;
 
 namespace SpaceGame
 {
-	class Game
-	{
-		// Set console max width and height
-		private const int maxWidth = 40;
-		private const int maxHeight = 40;
+    class Game
+    {
+        // Set console max width and height
+        private const int maxWidth = 35;
+        private const int maxHeight = 30;
 
-		// Keeps the x coordinate of our spaceship position 
-		static readonly int playerPosX = Console.BufferWidth / 2;
-		static readonly int playerPosY = Console.BufferHeight - 1;
+        // Keeps the x coordinate of our spaceship position 
+        static int playerPosX = 0;
+        static int playerPosY = 0;
+        static string direction = null;
 
-		// Keeps x and y coordinates of enemies spaceships
-		static List<List<int>> enemies = new List<List<int>>();
+        // Keeps x and y coordinates of enemies spaceships
+        static List<List<int>> enemies = new List<List<int>>();
 
-		// Keeps x and y coordinates of our shots
-		static List<List<int>> shots = new List<List<int>>();
-		
-		// Set spaceships and shots icons
-		private const char playerIcon = 'Ä';
-		private const char enemyIcon = '#';
-		private const char shotIcon = '"';
+        // Keeps x and y coordinates of our shots
+        static List<List<int>> shots = new List<List<int>>();
 
-		// Set spaceships and shots colors
-		private const ConsoleColor playerColor = ConsoleColor.Cyan;
-		private const ConsoleColor enemiesColor = ConsoleColor.DarkRed;
-		private const ConsoleColor shotsColor = ConsoleColor.DarkYellow;
+        // Set spaceships and shots icons
+        private const char playerIcon = 'Ä';
+        private const char enemyIcon = '#';
+        private const char shotIcon = '"';
 
-		// Set amount of spaceship lives
-		private const int livesCount = 5;
+        // Set spaceships and shots colors
+        private const ConsoleColor playerColor = ConsoleColor.Cyan;
+        private const ConsoleColor enemiesColor = ConsoleColor.DarkRed;
+        private const ConsoleColor shotsColor = ConsoleColor.DarkYellow;
 
-		// Make global random variable
-		static readonly Random rnd = new Random();
+        // Set amount of spaceship lives
+        private const int livesCount = 5;
 
-		static void Main()
-		{
-			Console.BufferHeight = Console.WindowHeight = maxHeight;
-			Console.BufferWidth = Console.WindowWidth = maxWidth;
-			
-			
-			//Menu with instructions
-			DrawMenuScreen();
+        // Make global random variable
+        static readonly Random rnd = new Random();
 
-			while (livesCount >= 0)
-			{
-				// Game World
+        static void Main()
+        {
+            Console.BufferHeight = Console.WindowHeight = maxHeight;
+            Console.BufferWidth = Console.WindowWidth = maxWidth;
 
-				GenerateEnemyAtRandomPosition();
+            playerPosX = Console.BufferWidth / 2;
+            playerPosY = Console.BufferHeight - 1;
 
-				Update();
 
-				Draw();
+            //Menu with instructions
+            DrawMenuScreen();
 
-				if (Console.KeyAvailable)
-				{
-					// Set player game keys
-					ControlPlayer();
-				}
+            while (livesCount >= 0)
+            {
+                // Game World
 
-				// After certian amount of meteors destyoed increase speed
-				IncreaseLevel(); 
+                GenerateEnemyAtRandomPosition();
 
-				Thread.Sleep(200);
+                Update();
 
-				Console.Clear();
-			}
+                Draw();
 
-			// Store points per meteor hit
-			StorePoints();
+                if (Console.KeyAvailable)
+                {
+                    // Set player game keys
+                    ControlPlayer();
+                }
 
-			// Draw final scores
-			DrawScoreBoard();
-			Console.WriteLine("You are dead! Continue (Y/N):");
-		}
+                // After certian amount of meteors destyoed increase speed
+                IncreaseLevel();
 
-	
-	
+                Thread.Sleep(200);
 
-		private static void Update()
-		{
-			// Update Game World
-			UpdateEnemies();
-			UpdateShots();
-			CollisionsEnemiesShots();
-			CollisionsEnemiesPlayer();
-		}
+                Console.Clear();
+            }
 
-		private static void CollisionsEnemiesPlayer()
-		{
-			
-		}
+            // Store points per meteor hit
+            StorePoints();
 
-		private static void CollisionsEnemiesShots()
-		{
-			
-		}
+            //Draw final scores
+            DrawScoreBoard();
+            Console.WriteLine("You are dead! Continue (Y/N):");
+        }
 
-		private static void UpdateShots()
-		{
-			
-		}
 
-		private static void UpdateEnemies()
-		{
 
-		}
 
-		private static void GenerateEnemyAtRandomPosition()
-		{
-			int randomEnemyPosition = rnd.Next(0, Console.WindowWidth);
-		}
+        private static void Update()
+        {
+            // Update Game World
+            UpdateEnemies();
+            UpdateShots();
+            CollisionsEnemiesShots();
+            CollisionsEnemiesPlayer();
+        }
 
-		private static void Shoot()
-		{
-			
-		}
+        private static void CollisionsEnemiesPlayer()
+        {
 
-		private static void Draw()
-		{
-			DrawPlayer();
-			DrawEnemies();
-			DrawShots();
-		}
+        }
 
-		private static void DrawShots()
-		{
-			
-		}
+        private static void CollisionsEnemiesShots()
+        {
 
-		private static void DrawEnemies()
-		{
-			
-		}
+        }
 
-		private static void DrawPlayer()
-		{
-			List<int> playerCoordinates = new List<int>(){ playerPosX, playerPosY};
-			
+        private static void UpdateShots()
+        {
 
-			DrawSymbolAtSpecificCoordinates(playerCoordinates, playerIcon, playerColor);
-		}
+        }
 
-		private static void DrawSymbolAtSpecificCoordinates(List<int> playerCoordinates, char c, ConsoleColor playerColor)
-		{
-			
-		}
+        private static void UpdateEnemies()
+        {
 
-		private static void ControlPlayer()
-		{
-			ConsoleKeyInfo userInput = Console.ReadKey(true);
-			while (Console.KeyAvailable)
-			{
-				Console.ReadKey(true);
-			}
-			if (userInput.Key == ConsoleKey.Spacebar)
-			{
-				Shoot();
-			}
-			else if (userInput.Key == ConsoleKey.LeftArrow)
-			{
-				MovePlane();
-			}
+        }
 
-			else if (userInput.Key == ConsoleKey.RightArrow)
-			{
-				MovePlane();
-			}
+        private static void GenerateEnemyAtRandomPosition()
+        {
+            int randomEnemyPosition = rnd.Next(0, Console.WindowWidth);
+        }
 
-			else if (userInput.Key == ConsoleKey.UpArrow)
-			{
-				MovePlane();
-			}
+        private static void Shoot()
+        {
 
-			else if (userInput.Key == ConsoleKey.DownArrow)
-			{
-				MovePlane();
-			}
-		}
+        }
 
-		private static void MovePlane()
-		{
+        private static void Draw()
+        {
+            DrawPlayer();
+            DrawEnemies();
+            DrawShots();
+        }
 
-		}
-		private static void DrawMenuScreen()
-		{
+        private static void DrawShots()
+        {
 
-		}
+        }
 
-		private static void IncreaseLevel()
-		{
-		}
+        private static void DrawEnemies()
+        {
 
-		private static void DrawScoreBoard()
-		{
-		}
+        }
 
-		private static void StorePoints()
-		{
+        private static void DrawPlayer()
+        {
+            List<int> playerCoordinates = new List<int>() { playerPosX, playerPosY };
+            ConsoleColor playerColor = ConsoleColor.Cyan;
 
-		}
-	}
+
+            DrawSymbolAtSpecificCoordinates(playerCoordinates, playerIcon, playerColor);
+        }
+
+        private static void DrawSymbolAtSpecificCoordinates(List<int> playerCoordinates, char c, ConsoleColor playerColor)
+        {
+            Console.SetCursorPosition(playerPosX, playerPosY);
+            Console.ForegroundColor = playerColor;
+            Console.WriteLine(c);
+        }
+
+        private static void ControlPlayer()
+        {
+            ConsoleKeyInfo userInput = Console.ReadKey(true);
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            }
+            if (userInput.Key == ConsoleKey.Spacebar)
+            {
+                Shoot();
+            }
+            else if (userInput.Key == ConsoleKey.LeftArrow)
+            {
+                direction = "left";
+                MovePlane();
+
+            }
+
+            else if (userInput.Key == ConsoleKey.RightArrow)
+            {
+                direction = "right";
+                MovePlane();
+            }
+
+            else if (userInput.Key == ConsoleKey.UpArrow)
+            {
+                direction = "up";
+                MovePlane();
+            }
+
+            else if (userInput.Key == ConsoleKey.DownArrow)
+            {
+                direction = "down";
+                MovePlane();
+            }
+        }
+
+        private static void MovePlane()
+        {
+            if (direction == "left")
+            {
+                if (playerPosX - 1 > 0)
+                {
+                    playerPosX--;
+                }
+            }
+
+            if (direction == "right")
+            {
+                if (playerPosX + 1 < maxWidth - 1)
+                {
+                    playerPosX++;
+                }
+            }
+            //if (direction == "up")
+            //{
+            //    if (playerPosY - 1 > 0)
+            //    {
+            //        playerPosY--;
+            //    }
+            //}
+            //if (direction == "down")
+            //{
+            //    if (playerPosY + 1 < maxHeight - 1)
+            //    {
+            //        playerPosY++;
+            //    }
+            //}
+        }
+        private static void DrawMenuScreen()
+        {
+
+        }
+
+        private static void IncreaseLevel()
+        {
+        }
+
+        private static void DrawScoreBoard()
+        {
+        }
+
+        private static void StorePoints()
+        {
+
+        }
+    }
 }
