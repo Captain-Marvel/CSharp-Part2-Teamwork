@@ -6,12 +6,12 @@
 </a>
 </p>
 
-#Project Description
+<h1 align="center">Project Description</h1>
 Design and implement a Console Game by choice. It could be a classic well-known application like
 Minesweeper, Tetris, Chess, Snake, etc., but you can design your own type of game. You are absolutely
 free to choose the topic of your work.
 
-#General Requirements
+<h1 align="center">General Requirements</h1>
 Please define and implement the following assets in your project:
 * At least 1 multi-dimensional array
 * At least 3 one-dimensional arrays
@@ -20,20 +20,20 @@ Please define and implement the following assets in your project:
 * At least 2 exception handlings
 * At least 1 use of external text file
 
-#Additional Requirements
+<h1 align="center">Additional Requirements</h1>
 * Obligatory use Git to keep your source code and for team collaboration (you might use
 http://github.com or http://code.google.com). SVN or TFS are not allowed. Use Git. To
 understand better what Source Control Systems are, you can watch this lecture:
 https://www.youtube.com/watch?v=kFvayHoUIPg
 * Provide documentation for your application (more information below).
 
-#Optional Requirements
+<h1 align="center">Optional Requirements</h1>
 If you have a chance, time and a suitable situation, you might add some of the following to your project:
 * Object Oriented Programming (classes, interfaces, structures, inheritance, polymorphism, etc.)
 * Serialization of the data in the text file (binary)
 * Sound effects during the gameplay
 
-#Non-Required Work
+<h1 align="center">Non-Required Work</h1>
 * Completely finished project is not obligatory required. It will not be a big problem if your project
 is not completely finished or is not working greatly. This team work project is for educational
 purpose. Its main purpose is to experience working on a real-world project and to get some
@@ -41,7 +41,7 @@ experience in team collaboration with Git. http://academy.telerik.com
 http://telerikacademy.com
 Telerik Software Academy 2015 2 of 2 http://facebook.com/TelerikAcademy
 
-#Deliverables
+<h1 align="center">Deliverables</h1>
 Put the following in a ZIP archive and submit it (each team member submits the same file):
 * The complete source code.
 * Brief documentation of your project (2-3 pages). It should provide the following information (in
@@ -52,7 +52,7 @@ brief):
   * Any other information (optionally)
 * Optionally provide a PowerPoint presentation designed for the project defense.
 
-#Public Project Defense
+<h1 align="center">Public Project Defense</h1>
 Each team will have to deliver a public defense of its work in from of the other students and trainers.
 You will have only 5 minutes for the following:
 * Demonstrate the game (very shortly).
@@ -64,7 +64,7 @@ Bring your own laptop. Test it preliminary with the multimedia projector. Open t
 beforehand to save time. You have 5 minutes, no more. It is not necessary for all team members to
 participate in the project defense.
 
-#Give Feedback about Your Teammates
+<h1 align="center">Give Feedback about Your Teammates</h1>
 You will be invited to provide feedback about all your teammates, their attitude to this project, their
 technical skills, their team working skills, their contribution to the project, etc. The feedback is
 important part of the project evaluation so take it seriously and be honest.
