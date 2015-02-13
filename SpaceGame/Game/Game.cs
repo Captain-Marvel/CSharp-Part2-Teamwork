@@ -8,11 +8,12 @@ namespace SpaceGame
     {
         // Set console max width and height
         private const int maxWidth = 80;
-        private const int maxHeight = 40;
+        private const int maxHeight = 35;
          
         // Keeps the x coordinate of our spaceship position 
-        static readonly int playerPosX = Console.BufferWidth / 2;
-        static readonly int playerPosY = Console.BufferHeight - 1;
+        static int playerPosX = 0;
+        static int playerPosY = 0;
+        static string direction = null;
 
         // Keeps x and y coordinates of enemies spaceships
         static List<List<int>> enemies = new List<List<int>>();
@@ -49,6 +50,10 @@ namespace SpaceGame
         {
             Console.BufferHeight = Console.WindowHeight = maxHeight;
             Console.BufferWidth = Console.WindowWidth = maxWidth;
+
+            playerPosX = Console.BufferWidth / 2;
+            playerPosY = Console.BufferHeight - 1;
+			
 
 
             //Menu with instructions
@@ -160,6 +165,7 @@ namespace SpaceGame
         private static void DrawPlayer()
         {
             List<int> playerCoordinates = new List<int>() { playerPosX, playerPosY };
+            ConsoleColor playerColor = ConsoleColor.Cyan;
 
 
             DrawSymbolAtSpecificCoordinates(playerCoordinates, playerIcon, playerColor);
@@ -167,7 +173,9 @@ namespace SpaceGame
 
         private static void DrawSymbolAtSpecificCoordinates(List<int> playerCoordinates, char c, ConsoleColor playerColor)
         {
-
+            Console.SetCursorPosition(playerPosX, playerPosY);
+            Console.ForegroundColor = playerColor;
+            Console.WriteLine(c);
         }
 
         private static void ControlPlayer()
@@ -183,28 +191,60 @@ namespace SpaceGame
             }
             else if (userInput.Key == ConsoleKey.LeftArrow)
             {
+                direction = "left";
                 MovePlane();
             }
 
             else if (userInput.Key == ConsoleKey.RightArrow)
             {
+                direction = "right";
                 MovePlane();
             }
 
             else if (userInput.Key == ConsoleKey.UpArrow)
             {
+                direction = "up";
                 MovePlane();
             }
 
             else if (userInput.Key == ConsoleKey.DownArrow)
             {
+                direction = "down";
                 MovePlane();
             }
         }
 
         private static void MovePlane()
         {
+            if (direction == "left")
+            {
+                if (playerPosX - 1 > 0)
+                {
+                    playerPosX--;
+                }
+            }
 
+            if (direction == "right")
+            {
+                if (playerPosX + 1 < maxWidth - 1)
+                {
+                    playerPosX++;
+                }
+            }
+            //if (direction == "up")
+            //{
+            //    if (playerPosY - 1 > 0)
+            //    {
+            //        playerPosY--;
+            //    }
+            //}
+            //if (direction == "down")
+            //{
+            //    if (playerPosY + 1 < maxHeight - 1)
+            //    {
+            //        playerPosY++;
+            //    }
+            //}
         }
         private static void DrawMenuScreen()
         {
