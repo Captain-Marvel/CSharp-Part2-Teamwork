@@ -7,7 +7,7 @@ namespace SpaceGame
     public class Game
     {
         // Set console max width and height
-        private const int maxWidth = 40;
+        private const int maxWidth = 80;
         private const int maxHeight = 40;
          
         // Keeps the x coordinate of our spaceship position 
@@ -17,7 +17,7 @@ namespace SpaceGame
         // Keeps x and y coordinates of enemies spaceships
         static List<List<int>> enemies = new List<List<int>>();
 
-        static List<Meteor> meteors = new List<Meteor>();
+        static readonly List<Meteor> meteors = new List<Meteor>();
 
         // Keeps x and y coordinates of our shots
         static List<List<int>> shots = new List<List<int>>();
@@ -26,13 +26,13 @@ namespace SpaceGame
         private const char playerIcon = 'Ä';
 
         // Multiple meteors
-        public static char[] enemyIcons = new char[] { '#', '*', '@' };
+        public static readonly char[] enemyIcons = { '#', '*', '@' };
         private const char shotIcon = '"';
 
         // Set spaceships and shots colors
         private const ConsoleColor playerColor = ConsoleColor.Cyan;
        
-        public static ConsoleColor[] enemiesColors =  {ConsoleColor.Red, ConsoleColor.DarkCyan,
+        public static readonly ConsoleColor[] enemiesColors =  {ConsoleColor.Red, ConsoleColor.DarkCyan,
                                                       ConsoleColor.Blue, ConsoleColor.Magenta,
                                                       ConsoleColor.DarkYellow, ConsoleColor.DarkRed,
                                                       ConsoleColor.DarkGreen, ConsoleColor.DarkBlue};
