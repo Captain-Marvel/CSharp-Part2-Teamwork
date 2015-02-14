@@ -18,8 +18,8 @@ namespace SpaceGame
 		// Keeps x and y coordinates of enemies spaceships
 		static List<Meteor> meteors = new List<Meteor>();
 
-		// Keeps x and y coordinates of our shots
-		static List<Shot> shots = new List<Shot>();
+		// Keeps x and y coordinates of our shots 
+ 		static List<Shot> shots = new List<Shot>();
 
 		// Set spaceships and shots icons
 		private const char playerIcon = 'Ä';
@@ -104,20 +104,41 @@ namespace SpaceGame
 
 		private static void CollisionsEnemiesPlayer()
 		{
+            var removeMeteors = new List<int>();
+            var newMeteors = new List<Meteor>();
+
 			for (int i = 0; i < meteors.Count; i++)
 			{
-				if (meteors[i].X == playerPosX + 1 && meteors[i].Y == playerPosY - 1)
-				{
-					meteors.Remove(meteors[i]);
-					livesCount--;
-				}
+                if (meteors[i].X == playerPosX && meteors[i].Y == playerPosY - 1)
+                {
+                    removeMeteors.Add(i);
+                    livesCount--;
+                }
 			}
+
+            for (int i = 0; i < removeMeteors.Count; i++)
+            {
+                meteors.RemoveAt(removeMeteors[i]);
+            }
+
+            for (int i = 0; i < meteors.Count; i++)
+            {
+                if (!removeMeteors.Contains(i))
+                {
+                    newMeteors.Add(meteors[i]);
+                }
+            }
+
+            meteors.Clear();
+            meteors = newMeteors;
+
 		}
 
 		private static void CollisionsEnemiesShots()
 		{
 			var meteorsToRemove = new List<int>();
 			var shotsToRemove = new List<int>();
+
 			for (int meteor = 0; meteor < meteors.Count; meteor++)
 			{
 				for (int shot = 0; shot < shots.Count; shot++)
@@ -137,6 +158,7 @@ namespace SpaceGame
 			}
 
 			var newMeteors = new List<Meteor>();
+
 			for (int i = 0; i < meteors.Count; i++)
 			{
 				if (!meteorsToRemove.Contains(i))
@@ -146,6 +168,7 @@ namespace SpaceGame
 			}
 
 			var newShots = new List<Shot>();
+
 			for (int i = 0; i < shots.Count; i++)
 			{
 				if (!shotsToRemove.Contains(i))
@@ -154,6 +177,8 @@ namespace SpaceGame
 				}
 			}
 
+            meteors.Clear();
+            shots.Clear();
 			meteors = newMeteors;
 			shots = newShots;
 		}
