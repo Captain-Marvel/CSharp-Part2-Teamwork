@@ -21,7 +21,7 @@ namespace SpaceGame
 		static readonly List<Meteor> meteors = new List<Meteor>();
 
 		// Keeps x and y coordinates of our shots
-		static List<List<int>> shots = new List<List<int>>();
+		static List<Shot> shots = new List<Shot>();
 
 		// Set spaceships and shots icons
 		private const char playerIcon = 'Ä';
@@ -118,7 +118,15 @@ namespace SpaceGame
 
 		private static void UpdateShots()
 		{
+            for (int i = 0; i < shots.Count; i++)
+            {
+                shots[i].Y -= 1;
 
+                if (shots[i].Y <= 0)
+                {
+                    shots.Remove(shots[i]);
+                }
+            }
 		}
 
 		private static void UpdateEnemies()
@@ -144,7 +152,11 @@ namespace SpaceGame
 
 		private static void Shoot()
 		{
+            Shot shot = new Shot(playerPosX, playerPosY - 1);
 
+            shots.Add(shot);
+
+          
 		}
 
 		private static void Draw()
@@ -156,8 +168,12 @@ namespace SpaceGame
 
 		private static void DrawShots()
 		{
+            for (int i = 0; i < shots.Count; i++ )
+            {
+                shots[i].Print();
+            }
 
-		}
+        }
 
 		private static void DrawEnemies()
 		{
@@ -217,6 +233,10 @@ namespace SpaceGame
 				direction = "down";
 				MovePlane();
 			}
+            else if (userInput.Key == ConsoleKey.Spacebar)
+            {
+                Shoot();
+            }
 		}
 
 		private static void MovePlane()
@@ -263,7 +283,7 @@ namespace SpaceGame
 		{
 
 			// Thread sleep will be changed when level is increased
-			Thread.Sleep(300);
+			Thread.Sleep(100);
 		}
 
 		private static void DrawScoreBoard()
