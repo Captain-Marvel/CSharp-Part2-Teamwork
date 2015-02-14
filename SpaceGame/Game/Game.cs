@@ -16,9 +16,7 @@ namespace SpaceGame
 		static string direction = null;
 
 		// Keeps x and y coordinates of enemies spaceships
-		static List<List<int>> enemies = new List<List<int>>();
-
-		static readonly List<Meteor> meteors = new List<Meteor>();
+		static List<Meteor> meteors = new List<Meteor>();
 
 		// Keeps x and y coordinates of our shots
 		static List<Shot> shots = new List<Shot>();
@@ -106,42 +104,71 @@ namespace SpaceGame
 
 		private static void CollisionsEnemiesPlayer()
 		{
-            for (int i = 0; i < meteors.Count; i++)
-            {
-                if (meteors[i].X == playerPosX + 1 && meteors[i].Y == playerPosY - 1)
-                {
-                    meteors.Remove(meteors[i]);
-                    livesCount--;
-                }
-            }
+			for (int i = 0; i < meteors.Count; i++)
+			{
+				if (meteors[i].X == playerPosX + 1 && meteors[i].Y == playerPosY - 1)
+				{
+					meteors.Remove(meteors[i]);
+					livesCount--;
+				}
+			}
 		}
 
 		private static void CollisionsEnemiesShots()
 		{
-            for (int i = 0; i < shots.Count; i++)
-            {
-                for (int j = 0; j < meteors.Count; j++)
-                {
-                    if (shots[i].X == meteors[j].X && shots[i].Y == meteors[j].Y)
-                    {
-                      //  shots.Remove(shots[i]);
-                      //  meteors.Remove(meteors[j]);
-                    }
-                }
-            }
+			var meteorsToRemove = new List<int>();
+			var shotsToRemove = new List<int>();
+			for (int meteor = 0; meteor < meteors.Count; meteor++)
+			{
+				for (int shot = 0; shot < shots.Count; shot++)
+				{
+					if (shots[shot].X == meteors[meteor].X && shots[shot].Y == meteors[meteor].Y) 
+					{
+						meteorsToRemove.Add(meteor);
+						shotsToRemove.Add(shot);
+					}
+				}
+			}
+
+			for (int i = 0; i < meteorsToRemove.Count; i++)
+			{
+				meteors.RemoveAt(meteorsToRemove[i]);
+				shots.RemoveAt(shotsToRemove[i]);
+			}
+
+			var newMeteors = new List<Meteor>();
+			for (int i = 0; i < meteors.Count; i++)
+			{
+				if (!meteorsToRemove.Contains(i))
+				{
+					newMeteors.Add(meteors[i]);
+				}
+			}
+
+			var newShots = new List<Shot>();
+			for (int i = 0; i < shots.Count; i++)
+			{
+				if (!shotsToRemove.Contains(i))
+				{
+					newShots.Add(shots[i]);
+				}
+			}
+
+			meteors = newMeteors;
+			shots = newShots;
 		}
 
 		private static void UpdateShots()
 		{
-            for (int i = 0; i < shots.Count; i++)
-            {
-                shots[i].Y -= 1;
+			for (int i = 0; i < shots.Count; i++)
+			{
+				shots[i].Y -= 1;
 
-                if (shots[i].Y <= 0)
-                {
-                    shots.Remove(shots[i]);
-                }
-            }
+				if (shots[i].Y <= 0)
+				{
+					shots.Remove(shots[i]);
+				}
+			}
 		}
 
 		private static void UpdateEnemies()
@@ -167,9 +194,9 @@ namespace SpaceGame
 
 		private static void Shoot()
 		{
-            Shot shot = new Shot(playerPosX, playerPosY - 1);
+			Shot shot = new Shot(playerPosX, playerPosY - 1);
 
-            shots.Add(shot);
+			shots.Add(shot);
 		}
 
 		private static void Draw()
@@ -181,12 +208,12 @@ namespace SpaceGame
 
 		private static void DrawShots()
 		{
-            for (int i = 0; i < shots.Count; i++ )
-            {
-                shots[i].Print();
-            }
+			for (int i = 0; i < shots.Count; i++ )
+			{
+				shots[i].Print();
+			}
 
-        }
+		}
 
 		private static void DrawEnemies()
 		{
@@ -228,28 +255,25 @@ namespace SpaceGame
 				direction = "left";
 				MovePlane();
 			}
-
 			else if (userInput.Key == ConsoleKey.RightArrow)
 			{
 				direction = "right";
 				MovePlane();
 			}
-
 			else if (userInput.Key == ConsoleKey.UpArrow)
 			{
 				direction = "up";
 				MovePlane();
 			}
-
 			else if (userInput.Key == ConsoleKey.DownArrow)
 			{
 				direction = "down";
 				MovePlane();
 			}
-            else if (userInput.Key == ConsoleKey.Spacebar)
-            {
-                Shoot();
-            }
+			else if (userInput.Key == ConsoleKey.Spacebar)
+			{
+				Shoot();
+			}
 		}
 
 		private static void MovePlane()
