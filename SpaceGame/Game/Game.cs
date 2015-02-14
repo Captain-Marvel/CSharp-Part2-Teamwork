@@ -43,10 +43,8 @@ namespace SpaceGame
 			ConsoleColor.DarkBlue
 		};
 
-		private const ConsoleColor shotsColor = ConsoleColor.DarkYellow;
-
 		// Set amount of spaceship lives
-		private const int livesCount = 5;
+		private static int livesCount = 5;
 
 		// Make global random variable
 		static readonly Random rnd = new Random();
@@ -108,12 +106,29 @@ namespace SpaceGame
 
 		private static void CollisionsEnemiesPlayer()
 		{
-
+            for (int i = 0; i < meteors.Count; i++)
+            {
+                if (meteors[i].X == playerPosX + 1 && meteors[i].Y == playerPosY - 1)
+                {
+                    meteors.Remove(meteors[i]);
+                    livesCount--;
+                }
+            }
 		}
 
 		private static void CollisionsEnemiesShots()
 		{
-
+            for (int i = 0; i < shots.Count; i++)
+            {
+                for (int j = 0; j < meteors.Count; j++)
+                {
+                    if (shots[i].X == meteors[j].X && shots[i].Y == meteors[j].Y)
+                    {
+                      //  shots.Remove(shots[i]);
+                      //  meteors.Remove(meteors[j]);
+                    }
+                }
+            }
 		}
 
 		private static void UpdateShots()
@@ -155,8 +170,6 @@ namespace SpaceGame
             Shot shot = new Shot(playerPosX, playerPosY - 1);
 
             shots.Add(shot);
-
-          
 		}
 
 		private static void Draw()
