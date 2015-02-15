@@ -13,6 +13,8 @@ namespace SpaceGame
 		// Keeps the x coordinate of our spaceship position 
 		static int playerPosX;
 		static int playerPosY;
+        static int PointsX;
+        static int PointsY;
 		static string direction;
 
 		// Keeps x and y coordinates of enemies spaceships
@@ -40,16 +42,17 @@ namespace SpaceGame
 			ConsoleColor.DarkGreen, 
 			ConsoleColor.DarkBlue
 		};
-
+        
 		// Set amount of spaceship lives
 		private static int livesCount = 5;
+        private static int scoreCount = 0;
 
 		static void Main()
 		{
 
 			Console.BufferHeight = Console.WindowHeight = maxHeight;
 			Console.BufferWidth = Console.WindowWidth = maxWidth;
-
+            
 			playerPosX = Console.BufferWidth / 2;
 			playerPosY = Console.BufferHeight - 1;
 
@@ -68,6 +71,7 @@ namespace SpaceGame
 				{
 					// Game World
 
+                    
 					GenerateEnemyAtRandomPosition();
 
 					Update();
@@ -83,6 +87,7 @@ namespace SpaceGame
 					// After certain amount of falling objects was detroyed, new game level reached
 					IncreaseLevel();
 
+                    DrawScoreBoard();
 					Console.Clear();
 				}
 
@@ -90,8 +95,9 @@ namespace SpaceGame
 				StorePoints();
 
 				// Draw final scores
-				DrawScoreBoard();
+				
 				Console.WriteLine("You are dead! Continue (Y/N):");
+               
 			}
 		   
 		}
@@ -152,6 +158,7 @@ namespace SpaceGame
 		private static void Update()
 		{
 			// Update Game World
+            
 			UpdateEnemies();
 			UpdateShots();
 			CollisionsEnemiesShots();
@@ -162,6 +169,7 @@ namespace SpaceGame
 		{
 			var removeMeteors = new List<int>();
 			var newMeteors = new List<Meteor>();
+            
 
 			for (int i = 0; i < meteors.Count; i++)
 			{
@@ -175,6 +183,8 @@ namespace SpaceGame
 			for (int i = 0; i < removeMeteors.Count; i++)
 			{
 				meteors.RemoveAt(removeMeteors[i]);
+                
+                
 			}
 
 			for (int i = 0; i < meteors.Count; i++)
@@ -199,8 +209,10 @@ namespace SpaceGame
 				{
 					if (shots[shot].X == meteors[meteor].X && shots[shot].Y == meteors[meteor].Y) 
 					{
+                        scoreCount++;
 						meteorsToRemove.Add(meteor);
 						shotsToRemove.Add(shot);
+
 					}
 				}
 			}
@@ -435,11 +447,18 @@ namespace SpaceGame
 		private static void DrawScoreBoard()
 		{
 
-		}
+            Console.BufferHeight = Console.WindowHeight = maxHeight;
+            Console.BufferWidth = Console.WindowWidth = maxWidth;
 
+            PointsX = Console.BufferWidth -5;
+            PointsY = Console.BufferHeight - 1;
+            Console.WriteLine(scoreCount);
+          
+		}
+      
 		private static void StorePoints()
 		{
-
+            Console.WriteLine("Score: " + scoreCount);
 		}
 	}
 }
