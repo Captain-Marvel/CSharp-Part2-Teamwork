@@ -11,15 +11,15 @@ namespace SpaceGame
 		private const int maxHeight = 35;
 
 		// Keeps the x coordinate of our spaceship position 
-		static int playerPosX = 0;
-		static int playerPosY = 0;
-		static string direction = null;
+		static int playerPosX;
+		static int playerPosY;
+		static string direction;
 
 		// Keeps x and y coordinates of enemies spaceships
 		static List<Meteor> meteors = new List<Meteor>();
 
 		// Keeps x and y coordinates of our shots 
- 		static List<Shot> shots = new List<Shot>();
+		static List<Shot> shots = new List<Shot>();
 
 		// Set spaceships and shots icons
 		private const char playerIcon = 'Ä';
@@ -44,9 +44,6 @@ namespace SpaceGame
 		// Set amount of spaceship lives
 		private static int livesCount = 5;
 
-		// Make global random variable
-		static readonly Random rnd = new Random();
-
 		static void Main()
 		{
 
@@ -56,108 +53,101 @@ namespace SpaceGame
 			playerPosX = Console.BufferWidth / 2;
 			playerPosY = Console.BufferHeight - 1;
 
-
-
 			//Menu with instructions
-            DrawMenu();
-            ConsoleKeyInfo pressedKey = Console.ReadKey();
-            if (pressedKey.Key == ConsoleKey.Enter || pressedKey.Key == ConsoleKey.C)
-            {
-                if (pressedKey.Key == ConsoleKey.C) 
-                {
-                    GameControls();
-                
-                
-                }
+			DrawMenu();
+			ConsoleKeyInfo pressedKey = Console.ReadKey();
+			if (pressedKey.Key == ConsoleKey.Enter || pressedKey.Key == ConsoleKey.C)
+			{
+				if (pressedKey.Key == ConsoleKey.C) 
+				{
+					GameControls();
+				}
 
 
-                while (livesCount >= 0)
-                {
-                    // Game World
+				while (livesCount >= 0)
+				{
+					// Game World
 
-                    GenerateEnemyAtRandomPosition();
+					GenerateEnemyAtRandomPosition();
 
-                    Update();
+					Update();
 
-                    Draw();
+					Draw();
 
-                    if (Console.KeyAvailable)
-                    {
-                        // Set player game keys
-                        ControlPlayer();
-                    }
+					if (Console.KeyAvailable)
+					{
+						// Set player game keys
+						ControlPlayer();
+					}
 
-                    // After certain amount of falling objects was detroyed, new game level reached
-                    IncreaseLevel();
+					// After certain amount of falling objects was detroyed, new game level reached
+					IncreaseLevel();
 
-                    Console.Clear();
-                }
+					Console.Clear();
+				}
 
-                // Store points per meteor hit
-                StorePoints();
+				// Store points per meteor hit
+				StorePoints();
 
-                // Draw final scores
-                DrawScoreBoard();
-                Console.WriteLine("You are dead! Continue (Y/N):");
-            }
-           
+				// Draw final scores
+				DrawScoreBoard();
+				Console.WriteLine("You are dead! Continue (Y/N):");
+			}
+		   
 		}
 
 
-        static void GameControls() 
-        {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("                                           /\\         ");
-            Console.WriteLine("                                        | /  \\ |");
-            Console.WriteLine("                                        |/ () \\|");
-            Console.WriteLine("                                        / (  ) \\");
-            Console.WriteLine("                                       / (    ) \\");
-            Console.WriteLine("                                      / (      ) \\");
-            Console.WriteLine("                                     / (        ) \\");
-            Console.WriteLine("                                    / (__________) \\");
-            Console.WriteLine("                                   /________________\\");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("                                Controls in SpaceGame are: ");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("   Left arrow  <--  for Left  ");
-            Console.WriteLine("   Right arrow -->  for Right");
-            Console.WriteLine("   Spacebar to shoot");
-            Thread.Sleep(4000);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("                                         Be Ready");
-            Thread.Sleep(1000);
-            Console.WriteLine(  );
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("                                             3");
-            Thread.Sleep(1000); 
-            Console.WriteLine( );
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("                                             2");
-            Console.WriteLine(  );
-            Thread.Sleep(1000);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("                                             1");
-            Console.WriteLine( );
-            Thread.Sleep(321);
-            Console.ForegroundColor = ConsoleColor.White;
-            
-
-
-            Console.ForegroundColor = ConsoleColor.White;
-        }
+		static void GameControls() 
+		{
+			Console.Clear();
+			Console.ForegroundColor = ConsoleColor.Cyan;
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("                                           /\\         ");
+			Console.WriteLine("                                        | /  \\ |");
+			Console.WriteLine("                                        |/ () \\|");
+			Console.WriteLine("                                        / (  ) \\");
+			Console.WriteLine("                                       / (    ) \\");
+			Console.WriteLine("                                      / (      ) \\");
+			Console.WriteLine("                                     / (        ) \\");
+			Console.WriteLine("                                    / (__________) \\");
+			Console.WriteLine("                                   /________________\\");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine("                                Controls in SpaceGame are: ");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("   Left arrow  <--  for Left  ");
+			Console.WriteLine("   Right arrow -->  for Right");
+			Console.WriteLine("   Spacebar to shoot");
+			Thread.Sleep(4000);
+			Console.ForegroundColor = ConsoleColor.Blue;
+			Console.WriteLine("                                         Be Ready");
+			Thread.Sleep(1000);
+			Console.WriteLine(  );
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine("                                             3");
+			Thread.Sleep(1000); 
+			Console.WriteLine( );
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine("                                             2");
+			Console.WriteLine(  );
+			Thread.Sleep(1000);
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("                                             1");
+			Console.WriteLine( );
+			Thread.Sleep(321);
+			Console.ForegroundColor = ConsoleColor.White;
+			Console.ForegroundColor = ConsoleColor.White;
+		}
 
 		private static void Update()
 		{
@@ -170,34 +160,32 @@ namespace SpaceGame
 
 		private static void CollisionsEnemiesPlayer()
 		{
-            var removeMeteors = new List<int>();
-            var newMeteors = new List<Meteor>();
+			var removeMeteors = new List<int>();
+			var newMeteors = new List<Meteor>();
 
 			for (int i = 0; i < meteors.Count; i++)
 			{
-                if (meteors[i].X == playerPosX && meteors[i].Y == playerPosY - 1)
-                {
-                    removeMeteors.Add(i);
-                    livesCount--;
-                }
+				if (meteors[i].X == playerPosX && meteors[i].Y == playerPosY - 1)
+				{
+					removeMeteors.Add(i);
+					livesCount--;
+				}
 			}
 
-            for (int i = 0; i < removeMeteors.Count; i++)
-            {
-                meteors.RemoveAt(removeMeteors[i]);
-            }
+			for (int i = 0; i < removeMeteors.Count; i++)
+			{
+				meteors.RemoveAt(removeMeteors[i]);
+			}
 
-            for (int i = 0; i < meteors.Count; i++)
-            {
-                if (!removeMeteors.Contains(i))
-                {
-                    newMeteors.Add(meteors[i]);
-                }
-            }
+			for (int i = 0; i < meteors.Count; i++)
+			{
+				if (!removeMeteors.Contains(i))
+				{
+					newMeteors.Add(meteors[i]);
+				}
+			}
 
-            meteors.Clear();
-            meteors = newMeteors;
-
+			meteors = newMeteors;
 		}
 
 		private static void CollisionsEnemiesShots()
@@ -242,9 +230,7 @@ namespace SpaceGame
 					newShots.Add(shots[i]);
 				}
 			}
-
-            meteors.Clear();
-            shots.Clear();
+			
 			meteors = newMeteors;
 			shots = newShots;
 		}
@@ -317,9 +303,6 @@ namespace SpaceGame
 		private static void DrawPlayer()
 		{
 			List<int> playerCoordinates = new List<int>() { playerPosX, playerPosY };
-			
-
-
 			DrawSymbolAtSpecificCoordinates(playerCoordinates, playerIcon);
 		}
 
@@ -366,47 +349,39 @@ namespace SpaceGame
 				Shoot();
 			}
 		}
-       
-        static void DrawMenu()
-        {
-
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("                                           /\\         ");
-            Console.WriteLine("                                        | /  \\ |");
-            Console.WriteLine("                                        |/ () \\|");
-            Console.WriteLine("                                        / (  ) \\");
-            Console.WriteLine("                                       / (    ) \\");
-            Console.WriteLine("                                      / (      ) \\");
-            Console.WriteLine("                                     / (        ) \\");
-            Console.WriteLine("                                    / (__________) \\");
-            Console.WriteLine("                                   /________________\\");
-            Console.WriteLine();
-          
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("                                Welcome to SpaceGame");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("   Press Enter for New Game");
-            Console.WriteLine("   Press C to see the game controls");
-            Console.WriteLine("   Press Esc to exit");
-            
-
-
-            Console.ForegroundColor = ConsoleColor.White;
-
-
-
-        }
+	   
+		static void DrawMenu()
+		{
+			Console.ForegroundColor = ConsoleColor.Cyan;
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("                                           /\\         ");
+			Console.WriteLine("                                        | /  \\ |");
+			Console.WriteLine("                                        |/ () \\|");
+			Console.WriteLine("                                        / (  ) \\");
+			Console.WriteLine("                                       / (    ) \\");
+			Console.WriteLine("                                      / (      ) \\");
+			Console.WriteLine("                                     / (        ) \\");
+			Console.WriteLine("                                    / (__________) \\");
+			Console.WriteLine("                                   /________________\\");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine("                                Welcome to SpaceGame");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("   Press Enter for New Game");
+			Console.WriteLine("   Press C to see the game controls");
+			Console.WriteLine("   Press Esc to exit");
+			Console.ForegroundColor = ConsoleColor.White;
+		}
 
 
 
@@ -445,6 +420,7 @@ namespace SpaceGame
 			//    }
 			//}
 		}
+
 		private static void DrawMenuScreen()
 		{
 
@@ -452,13 +428,13 @@ namespace SpaceGame
 
 		private static void IncreaseLevel()
 		{
-
 			// Thread sleep will be changed when level is increased
 			Thread.Sleep(100);
 		}
 
 		private static void DrawScoreBoard()
 		{
+
 		}
 
 		private static void StorePoints()

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceGame
 {
 	public class Meteor : IPrintable
 	{
-		// private fields
-
 		// Holds X coordinate for the meteor
 		public int X { get; set; }
 
@@ -37,8 +31,10 @@ namespace SpaceGame
 		   
 			// We start from top of the console coordinate system
 			this.Y = 0;
+
 			// Get random X coordinatie
 			this.X = generator.Next(0, width);
+
 			this.Color = Game.enemiesColors[generator.Next(0, Game.enemiesColors.Length)];
 			this.Symbol = Game.enemyIcons[generator.Next(0, Game.enemyIcons.Length)];
 		}
