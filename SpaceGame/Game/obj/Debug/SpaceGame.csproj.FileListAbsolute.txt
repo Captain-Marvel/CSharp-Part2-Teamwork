@@ -1,0 +1,12 @@
+D:\temp\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.exe.config
+D:\temp\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.exe
+D:\temp\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.pdb
+D:\temp\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\SpaceGame.csprojResolveAssemblyReference.cache
+D:\temp\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\Game.exe
+D:\temp\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\Game.pdb
+D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.exe.config
+D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\Game.exe
+D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\Game.pdb
+D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.exe
+D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.pdb
+D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\SpaceGame.csprojResolveAssemblyReference.cache
