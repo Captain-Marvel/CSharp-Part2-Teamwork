@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Media;
-using System.IO;
+using Game;
 
 namespace SpaceGame
 {
 	public class Game
 	{
-        private static string rootGameDir = Directory.GetCurrentDirectory();
 		// Set console max width and height
 		private const int maxWidth = 80;
 		private const int maxHeight = 35;
@@ -16,8 +14,8 @@ namespace SpaceGame
 		// Keeps the x coordinate of our spaceship position 
 		static int playerPosX;
 		static int playerPosY;
-        static int PointsX;
-        static int PointsY;
+		static int PointsX;
+		static int PointsY;
 		static string direction;
 
 		// Keeps x and y coordinates of enemies spaceships
@@ -45,18 +43,18 @@ namespace SpaceGame
 			ConsoleColor.DarkGreen, 
 			ConsoleColor.DarkBlue
 		};
-        
+		
 		// Set amount of spaceship lives
 		private static int livesCount = 5;
-        private static int scoreCount = 0;
+		private static int scoreCount = 0;
 
 		static void Main()
 		{
-            Sounds.MainMenuSound(false);
-            
+			Sounds.MainMenuSound(false);
+			
 			Console.BufferHeight = Console.WindowHeight = maxHeight;
 			Console.BufferWidth = Console.WindowWidth = maxWidth;
-            
+			
 			playerPosX = Console.BufferWidth / 2;
 			playerPosY = Console.BufferHeight - 1;
 
@@ -70,11 +68,11 @@ namespace SpaceGame
 					GameControls();
 				}
 
-                Sounds.OverTheGameSound();
+				Sounds.OverTheGameSound();
 				while (livesCount >= 0)
 				{
 					// Game World
-                                                           
+														   
 					GenerateEnemyAtRandomPosition();
 
 					Update();
@@ -90,7 +88,7 @@ namespace SpaceGame
 					// After certain amount of falling objects was detroyed, new game level reached
 					IncreaseLevel();
 
-                    DrawScoreBoard();
+					DrawScoreBoard();
 					Console.Clear();
 				}
 
@@ -100,7 +98,7 @@ namespace SpaceGame
 				// Draw final scores
 				
 				Console.WriteLine("You are dead! Continue (Y/N):");
-               
+			   
 			}
 		   
 		}
@@ -140,11 +138,11 @@ namespace SpaceGame
 			Thread.Sleep(4000);
 			Console.ForegroundColor = ConsoleColor.Blue;
 			Console.WriteLine("                                         Be Ready");
-		    Thread.Sleep(1000);
+			Thread.Sleep(1000);
 			Console.WriteLine(  );
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.WriteLine("                                             3");
-		    Thread.Sleep(1000); 
+			Thread.Sleep(1000); 
 			Console.WriteLine( );
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			Console.WriteLine("                                             2");
@@ -161,7 +159,7 @@ namespace SpaceGame
 		private static void Update()
 		{
 			// Update Game World
-            
+			
 			UpdateEnemies();
 			UpdateShots();
 			CollisionsEnemiesShots();
@@ -172,7 +170,7 @@ namespace SpaceGame
 		{
 			var removeMeteors = new List<int>();
 			var newMeteors = new List<Meteor>();
-            
+			
 
 			for (int i = 0; i < meteors.Count; i++)
 			{
@@ -186,8 +184,8 @@ namespace SpaceGame
 			for (int i = 0; i < removeMeteors.Count; i++)
 			{
 				meteors.RemoveAt(removeMeteors[i]);
-                
-                
+				
+				
 			}
 
 			for (int i = 0; i < meteors.Count; i++)
@@ -212,7 +210,7 @@ namespace SpaceGame
 				{
 					if (shots[shot].X == meteors[meteor].X && shots[shot].Y == meteors[meteor].Y) 
 					{
-                        scoreCount++;
+						scoreCount++;
 						meteorsToRemove.Add(meteor);
 						shotsToRemove.Add(shot);
 
@@ -436,11 +434,6 @@ namespace SpaceGame
 			//}
 		}
 
-		private static void DrawMenuScreen()
-		{
-
-		}
-
 		private static void IncreaseLevel()
 		{
 			// Thread sleep will be changed when level is increased
@@ -450,59 +443,18 @@ namespace SpaceGame
 		private static void DrawScoreBoard()
 		{
 
-            Console.BufferHeight = Console.WindowHeight = maxHeight;
-            Console.BufferWidth = Console.WindowWidth = maxWidth;
+			Console.BufferHeight = Console.WindowHeight = maxHeight;
+			Console.BufferWidth = Console.WindowWidth = maxWidth;
 
-            PointsX = Console.BufferWidth -5;
-            PointsY = Console.BufferHeight - 1;
-            Console.WriteLine(scoreCount);
-          
+			PointsX = Console.BufferWidth -5;
+			PointsY = Console.BufferHeight - 1;
+			Console.WriteLine(scoreCount);
+		  
 		}
-      
+	  
 		private static void StorePoints()
 		{
-            Console.WriteLine("Score: " + scoreCount);
+			Console.WriteLine("Score: " + scoreCount);
 		}
-
-        public class Sounds
-        {
-            public static void GameOverSound()
-            {
-                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\Game_Over_sound_effect.wav");
-               player.PlayLooping();
-            }
-            public static void OverTheGameSound()
-            {
-                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\The_Legend_of_Zelda-_Link_39_s_Awakening_-_Overwor.wav");
-                player.PlayLooping();
-            }
-            public static void MainMenuSound(bool isOn)
-            {
-                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\02-wild-plains.wav");
-                if (isOn)
-                {
-                    player.Stop();
-                }
-                else
-                {
-                    player.PlayLooping();
-                }
-            }
-            public static void LevelClear()
-            {
-                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\Juicy_M_4_decks.wav");
-                player.Play();
-            }
-            public static void JumpSound()
-            {
-                Console.Beep(700, 10);
-            }
-            public static void End()
-            {
-                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\FAR_CRY_4_Theme_-_soundtrack.wav");
-                player.Play();
-                Thread.Sleep(700);
-            }
-        }
 	}
 }

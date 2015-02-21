@@ -10,3 +10,9 @@ D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\Game.
 D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.exe
 D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.pdb
 D:\myfiles\Telerik\TeamWork\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\SpaceGame.csprojResolveAssemblyReference.cache
+C:\Users\Lyudmil\Documents\GitHub\Teamwork-C#2-Feb-2015\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.exe.config
+C:\Users\Lyudmil\Documents\GitHub\Teamwork-C#2-Feb-2015\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\Game.exe
+C:\Users\Lyudmil\Documents\GitHub\Teamwork-C#2-Feb-2015\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.exe
+C:\Users\Lyudmil\Documents\GitHub\Teamwork-C#2-Feb-2015\CSharp-Part2-Teamwork\SpaceGame\Game\bin\Debug\Game.pdb
+C:\Users\Lyudmil\Documents\GitHub\Teamwork-C#2-Feb-2015\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\SpaceGame.csprojResolveAssemblyReference.cache
+C:\Users\Lyudmil\Documents\GitHub\Teamwork-C#2-Feb-2015\CSharp-Part2-Teamwork\SpaceGame\Game\obj\Debug\Game.pdb
