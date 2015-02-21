@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Media;
+using System.IO;
 
 namespace SpaceGame
 {
 	public class Game
 	{
+        private static string rootGameDir = Directory.GetCurrentDirectory();
 		// Set console max width and height
 		private const int maxWidth = 80;
 		private const int maxHeight = 35;
@@ -49,7 +52,8 @@ namespace SpaceGame
 
 		static void Main()
 		{
-
+            Sounds.MainMenuSound(false);
+            
 			Console.BufferHeight = Console.WindowHeight = maxHeight;
 			Console.BufferWidth = Console.WindowWidth = maxWidth;
             
@@ -66,12 +70,11 @@ namespace SpaceGame
 					GameControls();
 				}
 
-
+                Sounds.OverTheGameSound();
 				while (livesCount >= 0)
 				{
 					// Game World
-
-                    
+                                                           
 					GenerateEnemyAtRandomPosition();
 
 					Update();
@@ -137,11 +140,11 @@ namespace SpaceGame
 			Thread.Sleep(4000);
 			Console.ForegroundColor = ConsoleColor.Blue;
 			Console.WriteLine("                                         Be Ready");
-			Thread.Sleep(1000);
+		    Thread.Sleep(1000);
 			Console.WriteLine(  );
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.WriteLine("                                             3");
-			Thread.Sleep(1000); 
+		    Thread.Sleep(1000); 
 			Console.WriteLine( );
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			Console.WriteLine("                                             2");
@@ -460,5 +463,46 @@ namespace SpaceGame
 		{
             Console.WriteLine("Score: " + scoreCount);
 		}
+
+        public class Sounds
+        {
+            public static void GameOverSound()
+            {
+                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\Game_Over_sound_effect.wav");
+               player.PlayLooping();
+            }
+            public static void OverTheGameSound()
+            {
+                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\The_Legend_of_Zelda-_Link_39_s_Awakening_-_Overwor.wav");
+                player.PlayLooping();
+            }
+            public static void MainMenuSound(bool isOn)
+            {
+                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\02-wild-plains.wav");
+                if (isOn)
+                {
+                    player.Stop();
+                }
+                else
+                {
+                    player.PlayLooping();
+                }
+            }
+            public static void LevelClear()
+            {
+                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\Juicy_M_4_decks.wav");
+                player.Play();
+            }
+            public static void JumpSound()
+            {
+                Console.Beep(700, 10);
+            }
+            public static void End()
+            {
+                SoundPlayer player = new SoundPlayer(rootGameDir + @"\sounds\FAR_CRY_4_Theme_-_soundtrack.wav");
+                player.Play();
+                Thread.Sleep(700);
+            }
+        }
 	}
 }
