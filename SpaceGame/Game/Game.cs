@@ -208,7 +208,7 @@ namespace SpaceGame
 			{
 				for (int shot = 0; shot < shots.Count; shot++)
 				{
-					if (shots[shot].X == meteors[meteor].X && shots[shot].Y == meteors[meteor].Y) 
+					if (shots[shot].X == meteors[meteor].X && shots[shot].Y + 1 == meteors[meteor].Y) 
 					{
 						scoreCount++;
 						meteorsToRemove.Add(meteor);
