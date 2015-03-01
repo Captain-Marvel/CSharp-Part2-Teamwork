@@ -46,7 +46,7 @@ namespace SpaceGame
 		
 		// Set amount of spaceship lives
 		private static int livesCount = 5;
-		private static int scoreCount = 0;
+		private static int scoreCount;
 
 		static void Main()
 		{
@@ -316,10 +316,10 @@ namespace SpaceGame
 		private static void DrawPlayer()
 		{
 			List<int> playerCoordinates = new List<int>() { playerPosX, playerPosY };
-			DrawSymbolAtSpecificCoordinates(playerCoordinates, playerIcon);
+			DrawSymbolAtSpecificCoordinates(playerIcon);
 		}
 
-		private static void DrawSymbolAtSpecificCoordinates(List<int> playerCoordinates, char c)
+		private static void DrawSymbolAtSpecificCoordinates(char c)
 		{
 			Console.SetCursorPosition(playerPosX, playerPosY);
 			Console.ForegroundColor = playerColor;
